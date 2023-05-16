@@ -1,9 +1,12 @@
 package com.github.rsoi.service;
 
 import com.github.rsoi.domain.Greeting;
+import com.github.rsoi.dto.AllGreetingsResponse;
 import com.github.rsoi.dto.CreateGreetingRequest;
 import com.github.rsoi.dto.GreetingResponse;
+import com.github.rsoi.repository.GoodRepository;
 import com.github.rsoi.repository.GreetingRepository;
+import com.github.rsoi.repository.MarkRepository;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -27,6 +30,12 @@ public class GreetingServiceImpl implements GreetingService {
         } else {
             System.out.println("Cool, there are already some greetings in the DB");
         }
+    }
+
+
+    @Override
+    public AllGreetingsResponse getAllGreetings() {
+        return AllGreetingsResponse.of(greetingRepository.findAll().stream().toList());
     }
 
     @Override
